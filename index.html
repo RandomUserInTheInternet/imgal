@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Gallery</title>
+<link rel="stylesheet" href="styleshit.css"> 
+<link rel="stylesheet" href="styletest.css">
+<link rel="stylesheet" href="https://unpkg.com/css.gg@2.0.0/icons/css/link.css">
+<style>
+.typewriter h1 {
+  color: #0fb800;
+  overflow: hidden;
+  border-right: .15em solid orange; 
+  white-space: nowrap; 
+  margin: 0 auto; 
+  letter-spacing: .15em; 
+  animation: 
+    typing 2.8s steps(30, end) infinite,
+    blink-caret .5s ;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { width: 0 }
+  to { width: 40% }
+}
+
+/* The typewriter cursor effect */
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: orange }
+}
+</style>
+
+</head>
+<body>
+    <div class="overlay"></div>
+    <div class="box">
+        <section class="upload">
+            <h4>Refresh to close upload image</h4>
+            <br><br><br>
+            <form id="uploadForm" enctype="multipart/form-data">
+                <label for="my_image" class="upload-button">
+                    <span class="upload-icon">&#128441;</span> Choose Image
+                </label>
+                <input type="file" name="my_image" id="my_image" style="display: none;">
+                <input type="submit" name="submit" value="Upload" class="upload-button2">
+            </form>
+        </section>
+    </div>
+    <main>
+        <button class="upload-button">Upload Image</button>
+        <h2>Image Gallery</h2>
+        <section class="image-gallery" id="image-gallery">
+            <!-- Images will be loaded here by JavaScript -->
+        </section>
+    </main>
+
+  <footer>
+    <h4>NOT mobile friendly,<b><em> will fix soon<em><b></h4>
+    <p>Start sharing your own images today and become part of my gallery hehe</p>
+    <p>© 2023 Open gallery. All rights reserved.</p>
+  </footer>
+</div>
+
+<div class="overlay"> <div class="box">
+  <section class="upload">
+  <h4> refresh to close upload image</4>
+  <br>
+  <br>
+  <br>
+    <form action="upload.php" method="post" enctype="multipart/form-data">
+    <label for="my_image" class="upload-button">
+    <span class="upload-icon">&#128441;</span> Choose Image</label>
+      <input type="file" name="my_image" id="my_image" style="display: none;">
+      <input type="submit" name="submit" value="Upload"  class="upload-button2">
+    </form>
+  </section>
+</div>
+ 
+
+   <script>
+        document.getElementById('uploadForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            const file = formData.get('my_image');
+
+            fetch('/.netlify/functions/upload-image', {
+                method: 'POST',
+                body: JSON.stringify({ url: URL.createObjectURL(file) }),
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Handle success
+                alert('Image uploaded successfully!');
+                loadImages();
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        function loadImages() {
+            fetch('/.netlify/functions/get-images')
+                .then(response => response.json())
+                .then(data => {
+                    const gallery = document.getElementById('image-gallery');
+                    gallery.innerHTML = '';
+                    data.forEach(image => {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = image.url;
+                        gallery.appendChild(imgElement);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+        document.addEventListener('DOMContentLoaded', loadImages);
+    </script>
+
+</body>
+</html>
