@@ -1,0 +1,98 @@
+.body.no-scroll {
+    overflow: hidden; /* Prevent scrolling when box is visible */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+
+.overlay { /* New element for background */
+  position: fixed; /* Keep the overlay fixed */
+  top: 0;
+  left: 0;
+  width: 100%; /* Take up the entire width */
+  height: 100vh; /* Take up the entire viewport height */
+  background-color: rgba(0, 0, 0, 0.5); /* Black background with opacity */
+  z-index: 1; /* Ensure it's behind the box */
+  display: none; /* Hide initially */
+}
+
+.overlay.visible { /* Style for when overlay is visible */
+  display: block;
+}
+
+.box h3 {
+  margin-top: -40px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.upload {
+  text-align: center; /* Center content within the upload section */
+  margin-top: 15%;
+}
+
+.box {
+  position: fixed; /* Keep the box fixed when visible */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center the box */
+  display: none; /* Hide initially */
+  justify-content: center;
+  align-items: center;
+  padding: 20px; /* Adjust padding for design elements */
+  width:35%; /* Adjust width as desired */
+  height:30%; /* Remove fixed height for better layout */
+  border-radius: 5px;
+  background-color: rgb(204, 204, 204) ;
+  z-index: 2; /* Ensure the box is above the overlay */
+}
+
+.box-visible {
+  display: block; /* Show the box when the upload button is clicked */
+}
+
+.upload-button {
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  cursor: pointer; /* Indicate clickable behavior */
+  padding: 10px 20px; /* Add some padding */
+  border: none; /* Remove border for a cleaner look */
+  border-radius: 5px; /* Add rounded corners */
+  background-color: green; /* Set background color */
+  color:white; /* Set text color */
+  font-weight: bold; /* Make text bold */
+  transition: background-color 0.3s ease-in-out; /* Smooth transition on hover */
+  display: inline-block; /* Allow text and icon to be displayed inline */
+}
+
+.upload-button:hover {
+  background-color: #ddd; /* Change background color on hover */
+  color: green;
+}
+
+.upload-button2 {
+    margin-left: 20px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    cursor: pointer; /* Indicate clickable behavior */
+    padding: 10px 20px; /* Add some padding */
+    border: none; /* Remove border for a cleaner look */
+    border-radius: 5px; /* Add rounded corners */
+    background-color: green; /* Set background color */
+    color:white; /* Set text color */
+    font-weight: bold; /* Make text bold */
+    transition: background-color 0.3s ease-in-out; /* Smooth transition on hover */
+    display: inline-block; /* Allow text and icon to be displayed inline */
+  }
+  
+  .upload-button2:hover {
+    background-color: #ddd; /* Change background color on hover */
+    color: green;
+  }
+
+.upload-icon {
+  margin-right: 5px; /* Add some space between icon and text */
+  font-size: 20px; /* Adjust icon size */
+}
+
+.body.no-scroll {
+  overflow: hidden; /* Prevent scrolling when box is visible */
+}
+
